@@ -1,0 +1,114 @@
+import { expect, test } from '@playwright/test'
+import { expectNoBrokenImages, watchErrors } from './helpers'
+
+const ROUTES = ['./', 'proekti', 'uslugi', 'materiali', 'za-proektanti', 'za-nas', 'kontakti', 'zapitvane', 'poveritelnost', 'usloviya', 'biskvitki',
+  'proekti/primeren-obekt-ofis-sgrada', 'proekti/primeren-obekt-rekonstrukciya', 'uslugi/al-bond-montazh', 'uslugi/ventiliruemi-fasadi', 'materiali/al-bond', 'materiali/laminam']
+
+test('every route renders without console errors, broken images or horizontal scroll', async ({ page }) => {
+  const errors = watchErrors(page)
+  for (const r of ROUTES) {
+    const res = await page.goto(r)
+    expect(res?.status(), r).toBe(200)
+    await expect(page.locator('h1').first()).toBeVisible()
+    await expectNoBrokenImages(page)
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+    expect(overflow, `horizontal overflow on ${r}`).toBeLessThanOrEqual(0)
+  }
+  expect(errors).toEqual([])
+})
+
+test('SEO: title, description, canonical, structured data', async ({ page, request }) => {
+  await page.goto('./')
+  await expect(page).toHaveTitle(/Al Bond, HPL/)
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /фасад/)
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://nikovassi.github.io/facade-company/')
+  const types = await page.locator('script[type="application/ld+json"]').evaluateAll((els) => els.map((e) => JSON.parse(e.textContent!)['@type']).flat())
+  expect(types).toEqual(expect.arrayContaining(['Organization', 'LocalBusiness', 'WebSite']))
+  await page.goto('uslugi/hpl-fasadi')
+  const t2 = await page.locator('script[type="application/ld+json"]').evaluateAll((els) => els.map((e) => JSON.parse(e.textContent!)['@type']))
+  expect(t2).toEqual(expect.arrayContaining(['Service', 'BreadcrumbList']))
+  const sitemap = await (await request.get('sitemap.xml')).text()
+  expect(sitemap).toContain('/uslugi/al-bond-montazh')
+  expect(sitemap).not.toContain('primeren-obekt') // placeholder projects are not indexed
+  expect(await (await request.get('robots.txt')).text()).toContain('Sitemap:')
+})
+
+test('unknown URL → 404 status and helpful page (GitHub Pages behaviour)', async ({ page }) => {
+  const errors = watchErrors(page)
+  const res = await page.goto('nyama-takava-stranica')
+  expect(res?.status()).toBe(404)
+  await expect(page.getByRole('heading', { level: 1, name: 'Тази страница не съществува' })).toBeVisible()
+  await page.getByRole('link', { name: 'Поискай оферта' }).first().click()
+  await expect(page.getByTestId('step-indicator')).toBeVisible()
+  // the document itself is a 404 — that is the expected response, not an error
+  expect(errors.filter((e) => !e.startsWith('404') && !e.includes('status of 404'))).toEqual([])
+})
+
+test('deep links work under the repository base path', async ({ page }) => {
+  await page.goto('materiali/hpl')
+  await expect(page.getByRole('heading', { level: 1, name: 'HPL' })).toBeVisible()
+  await page.getByRole('link', { name: /Поискай оферта за HPL/ }).click()
+  await expect(page).toHaveURL(/\/facade-company\/zapitvane\?.*material=hpl/)
+})
+
+test('dark mode toggle persists', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' })
+  await page.goto('proekti')
+  await page.getByRole('button', { name: 'Тъмна тема' }).click()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor)
+  expect(bg).toBe('rgb(17, 18, 20)')
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+})
+
+test('gallery opens fullscreen with next / previous / close', async ({ page }) => {
+  await page.goto('proekti/primeren-obekt-ofis-sgrada')
+  await page.getByRole('button', { name: /Отвори снимка 1/ }).click()
+  const dialog = page.getByRole('dialog', { name: /Галерия, снимка 1 от 4/ })
+  await expect(dialog).toBeVisible()
+  await page.getByRole('button', { name: 'Следваща снимка' }).click()
+  await expect(page.getByRole('dialog', { name: /снимка 2 от 4/ })).toBeVisible()
+  await page.keyboard.press('ArrowLeft')
+  await expect(page.getByRole('dialog', { name: /снимка 1 от 4/ })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+})
+
+test('before / after slider is keyboard accessible', async ({ page }) => {
+  await page.goto('proekti/primeren-obekt-rekonstrukciya')
+  const slider = page.getByRole('slider', { name: /Сравнение преди и след/ }).first()
+  await slider.focus()
+  await page.keyboard.press('End')
+  await expect(slider).toHaveValue('100')
+})
+
+test('PWA: manifest, icons and service worker', async ({ page, request, browserName }) => {
+  const manifest = await (await request.get('manifest.webmanifest')).json()
+  expect(manifest.start_url).toBe('/facade-company/')
+  expect(manifest.icons.length).toBeGreaterThanOrEqual(3)
+  for (const i of manifest.icons) expect((await request.get(i.src)).status()).toBe(200)
+  test.skip(browserName !== 'chromium', 'service worker check runs on Chromium')
+  await page.goto('./')
+  const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope)
+  expect(scope).toContain('/facade-company/')
+})
+
+test.describe('mobile', () => {
+  test.skip(({ isMobile }) => !isMobile, 'mobile only')
+
+  test('sticky quote CTA appears on detail pages after scrolling', async ({ page }) => {
+    await page.goto('uslugi/hpl-fasadi')
+    const sticky = page.getByTestId('sticky-cta')
+    await expect(sticky).toHaveAttribute('aria-hidden', 'true')
+    await page.evaluate(() => window.scrollTo(0, 800))
+    await expect(sticky).toHaveAttribute('aria-hidden', 'false')
+    await expect(sticky.getByRole('link', { name: /Поискай оферта/ })).toBeInViewport()
+  })
+
+  test('touch targets in the bottom navigation are at least 44px', async ({ page }) => {
+    await page.goto('./')
+    const sizes = await page.getByTestId('bottom-nav').getByRole('link').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().height))
+    for (const h of sizes) expect(h).toBeGreaterThanOrEqual(44)
+  })
+})
