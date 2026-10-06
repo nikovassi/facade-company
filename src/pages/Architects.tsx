@@ -28,16 +28,17 @@ export default function Architects() {
   })
   const [mat, setMat] = useState<MaterialKey | 'all'>('all')
   const [cat, setCat] = useState<DocumentItem['category'] | 'all'>('all')
-  const list = documents.filter((d) => (mat === 'all' || d.material === mat) && (cat === 'all' || d.category === cat))
-  const cats = [...new Set(documents.map((d) => d.category))]
-  const mats = [...new Set(documents.map((d) => d.material).filter(Boolean))] as MaterialKey[]
+  const available = documents.filter((d) => d.href)
+  const list = available.filter((d) => (mat === 'all' || d.material === mat) && (cat === 'all' || d.category === cat))
+  const cats = [...new Set(available.map((d) => d.category))]
+  const mats = [...new Set(available.map((d) => d.material).filter(Boolean))] as MaterialKey[]
 
   return (
     <>
       <PageHero eyebrow="За архитекти и проектанти" title="Техническа информация" intro="Спецификации, системи и детайли за проектиране на фасадата. Консултация по детайли, разкрой и избор на система.">
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <ButtonLink to="/zapitvane?ot=proektanti&usluga=consult" size="lg" icon="arrow" cta="architects-consult">Заяви консултация</ButtonLink>
-          <ButtonLink to="#downloads" size="lg" variant="ghost">Документи</ButtonLink>
+          <ButtonLink to="#downloads" size="lg" variant="ghost">Документация</ButtonLink>
         </div>
       </PageHero>
 
@@ -54,22 +55,35 @@ export default function Architects() {
       </section>
 
       <section id="downloads" className="container-x mt-16 scroll-mt-28" aria-labelledby="dl">
-        <h2 id="dl" className="h-section mb-6">Документи за изтегляне</h2>
-        <div className="-mx-4 md:-mx-8">
-          <div className="snap-row !gap-2" role="group" aria-label="Материал">
-            <Chip active={mat === 'all'} onClick={() => setMat('all')}>Всички материали</Chip>
-            {mats.map((m) => <Chip key={m} active={mat === m} onClick={() => setMat(m)}>{materialLabels[m]}</Chip>)}
+        <h2 id="dl" className="h-section mb-6">Документация</h2>
+        {available.length > 0 ? (
+          <>
+            <div className="-mx-4 md:-mx-8">
+              <div className="snap-row !gap-2" role="group" aria-label="Материал">
+                <Chip active={mat === 'all'} onClick={() => setMat('all')}>Всички материали</Chip>
+                {mats.map((m) => <Chip key={m} active={mat === m} onClick={() => setMat(m)}>{materialLabels[m]}</Chip>)}
+              </div>
+              <div className="snap-row mt-2 !gap-2" role="group" aria-label="Тип документ">
+                <Chip active={cat === 'all'} onClick={() => setCat('all')}>Всички типове</Chip>
+                {cats.map((c) => <Chip key={c} active={cat === c} onClick={() => setCat(c)}>{documentCategoryLabels[c]}</Chip>)}
+              </div>
+            </div>
+            <ul className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+              {list.map((d) => <li key={d.id}><DownloadCard d={d} /></li>)}
+            </ul>
+            {list.length === 0 && <p className="mt-6 text-ink-2">Няма документи за този избор.</p>}
+          </>
+        ) : (
+          <div className="grid gap-6 rounded-[28px] border border-line bg-surface p-6 md:grid-cols-[1.3fr_1fr] md:items-center md:p-10">
+            <div>
+              <p className="text-lg text-ink-2">Изпращаме документацията за конкретния проект — спецификации на материала, система за монтаж, типови детайли (PDF / DWG) и декларации за експлоатационни показатели.</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {Object.values(documentCategoryLabels).filter((l) => l !== 'Брошури').map((l) => <li key={l} className="rounded-full bg-surface-2 px-4 py-2">{l}</li>)}
+              </ul>
+            </div>
+            <ButtonLink to="/zapitvane?ot=proektanti-docs&usluga=consult" size="lg" icon="arrow" cta="architects-docs">Поискай документация</ButtonLink>
           </div>
-          <div className="snap-row mt-2 !gap-2" role="group" aria-label="Тип документ">
-            <Chip active={cat === 'all'} onClick={() => setCat('all')}>Всички типове</Chip>
-            {cats.map((c) => <Chip key={c} active={cat === c} onClick={() => setCat(c)}>{documentCategoryLabels[c]}</Chip>)}
-          </div>
-        </div>
-        <ul className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {list.map((d) => <li key={d.id}><DownloadCard d={d} /></li>)}
-        </ul>
-        {list.length === 0 && <p className="mt-6 text-ink-2">Няма документи за този избор.</p>}
-        <p className="mt-6 text-sm text-ink-3">Документите на производителите се публикуват само с разрешение за разпространение. Липсващ файл? Поискайте го в запитването.</p>
+        )}
       </section>
 
       <section className="mt-16" aria-labelledby="am">

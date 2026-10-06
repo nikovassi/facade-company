@@ -19,9 +19,9 @@ export function routes() {
   ]
 }
 
-/** Placeholder / details-pending projects are prerendered (noindex) but kept out of the sitemap. */
+/** Placeholder projects are prerendered (noindex) but kept out of the sitemap. */
 export const sitemapRoutes = () =>
-  routes().filter((r) => !['/zapitvane', '/admin'].includes(r) && !projects.some((p) => (p.isPlaceholder || p.detailsPending) && r === `/proekti/${p.slug}`))
+  routes().filter((r) => !['/zapitvane', '/admin'].includes(r) && !projects.some((p) => p.isPlaceholder && r === `/proekti/${p.slug}`))
 
 /** Source modules rendered for a URL (for modulepreload hints). */
 export function routeModules(url: string): string[] {

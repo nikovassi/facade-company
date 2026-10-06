@@ -29,7 +29,7 @@ test('SEO: title, description, canonical, structured data', async ({ page, reque
   expect(t2).toEqual(expect.arrayContaining(['Service', 'BreadcrumbList']))
   const sitemap = await (await request.get('sitemap.xml')).text()
   expect(sitemap).toContain('/uslugi/al-bond-montazh')
-  expect(sitemap).not.toContain('/proekti/zhilishtna-sgrada-keramichna-fasada') // projects with pending details are not indexed
+  expect(sitemap).toContain('/proekti/zhilishtna-sgrada-keramichna-fasada')
   expect(sitemap).not.toContain('laminam')
   expect(await (await request.get('robots.txt')).text()).toContain('Sitemap:')
 })

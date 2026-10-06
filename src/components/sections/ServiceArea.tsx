@@ -1,5 +1,4 @@
 import { site } from '../../content/site'
-import { Placeholder } from '../ui/Chip'
 import { Icon } from '../ui/Icon'
 
 export function ServiceArea() {
@@ -14,15 +13,11 @@ export function ServiceArea() {
         <div className="flex flex-col gap-4">
           <p className="flex items-center gap-3 text-xl font-semibold">
             <Icon name="pin" className="h-6 w-6 text-accent" />
-            {a.summary ?? <Placeholder className="!text-base">напр. „Цяла България“ — потвърдете</Placeholder>}
+            {a.summary}
           </p>
-          {a.cities.length > 0 ? (
-            <ul className="flex flex-wrap gap-2">{a.cities.map((c) => <li key={c} className="rounded-full bg-surface px-4 py-2">{c}</li>)}</ul>
-          ) : (
-            <Placeholder>Основни градове</Placeholder>
-          )}
+          {a.cities.length > 1 && <ul className="flex flex-wrap gap-2">{a.cities.map((c) => <li key={c} className="rounded-full bg-surface px-4 py-2">{c}</li>)}</ul>}
           {a.international.length > 0 && <p className="text-ink-2">Международни проекти: {a.international.join(', ')}</p>}
-          <p className="text-ink-2">Посочете града в запитването — ще потвърдим възможността за оглед и срок.</p>
+          <p className="text-ink-2">За обекти извън София — посочете града в запитването и ще потвърдим възможността за оглед и срок.</p>
         </div>
       </div>
     </section>

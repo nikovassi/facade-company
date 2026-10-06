@@ -19,7 +19,6 @@ import { track } from '../../lib/analytics'
 import { site } from '../../content/site'
 import { Button } from '../../components/ui/Button'
 import { Icon } from '../../components/ui/Icon'
-import { Placeholder } from '../../components/ui/Chip'
 import { Honeypot, OptionGroup, TextArea, TextField } from './fields'
 import { FileUpload } from './FileUpload'
 import { Summary } from './Summary'
@@ -374,7 +373,7 @@ export function QuoteWizard({ prefill, source }: { prefill: LeadDraft; source: s
         </div>
         {!isSummary && step === 0 && (
           <p className="mx-auto max-w-2xl px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center text-sm text-ink-3 md:px-6">
-            Отговор: {site.responseTime ?? <Placeholder>срок за отговор</Placeholder>} · <Link to="/zapitvane?rezhim=barzo" className="font-semibold text-ink underline underline-offset-2">Бързо запитване</Link>
+            {site.responseTime && <>Отговор: {site.responseTime} · </>}<Link to="/zapitvane?rezhim=barzo" className="font-semibold text-ink underline underline-offset-2">Бързо запитване</Link>
           </p>
         )}
       </div>

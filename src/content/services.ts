@@ -113,7 +113,7 @@ export const services: Service[] = [
     description: 'Подготвяме разкрой на облицовката, детайли за ъгли, отвори и примки, както и количества — за да няма изненади при изпълнението.',
     features: ['Разкрой и номериране', 'Детайли за ъгли и отвори', 'Количествени сметки', 'Съгласуване с проектанта'],
     applications: ['Инвеститори', 'Архитекти', 'Генерални изпълнители'],
-    cover: { alt: 'Фасаден разкрой — чертеж', tone: 'ceramic-light', seed: 161 },
+    cover: { src: 'images/projects/staklo-i-al-bond/cover', alt: 'Фасада, проектирана около големите остъклявания' },
     gallery: [],
   },
   {
@@ -144,6 +144,8 @@ export const services: Service[] = [
     cover: { src: 'images/services/montazh', alt: 'Монтаж на фасадни панели от скеле' },
     gallery: [
       { src: 'images/projects/al-bond-koloni/01', alt: 'Монтаж на обшивка на колона' },
+      { src: 'images/services/montazh-2', alt: 'Жилищна сграда в скеле по време на монтажа' },
+      { src: 'images/services/montazh-3', alt: 'Монтаж на фасада на многоетажна сграда' },
       { src: 'images/projects/keramika-kompleks/02', alt: 'Сграда в скеле по време на монтажа' },
     ],
   },

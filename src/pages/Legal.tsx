@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
 import { emailHref, site } from '../content/site'
 import { PageHero } from '../components/sections/PageHero'
-import { Placeholder } from '../components/ui/Chip'
 import { useSeo } from '../lib/seo'
 
 /**
@@ -13,10 +12,10 @@ function Doc({ children }: { children: ReactNode }) {
   return <div className="container-x max-w-3xl pb-20 text-[1.0625rem] leading-relaxed text-ink-2 [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:text-ink [&_li]:mt-1.5 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-6">{children}</div>
 }
 
-const controller = () => site.legalName ?? <Placeholder>Юридическо име, ЕИК, адрес на администратора</Placeholder>
+const controller = () => `${site.legalName ?? site.brand}${site.vatId ? `, ЕИК ${site.vatId}` : ''}${site.contacts.address ? `, гр. ${site.contacts.address.city}, ${site.contacts.address.street}` : ''}`
 const privacyContact = () => {
   const e = site.contacts.privacyEmail ?? site.contacts.email
-  return e ? <a className="font-semibold text-accent" href={`mailto:${e}`}>{e}</a> : <Placeholder>email за заявки относно лични данни</Placeholder>
+  return e ? <a className="font-semibold text-accent" href={`mailto:${e}`}>{e}</a> : null
 }
 
 export function Privacy() {
@@ -25,7 +24,7 @@ export function Privacy() {
     <>
       <PageHero title="Политика за поверителност" intro="Как обработваме данните, които ни изпращате чрез формата за запитване." />
       <Doc>
-        <p className="rounded-2xl bg-surface-2 p-4 text-sm">Последна актуализация: <Placeholder>дата</Placeholder>. Текстът трябва да бъде прегледан от юрист преди публикуване.</p>
+        <p className="rounded-2xl bg-surface-2 p-4 text-sm">Последна актуализация: 06.10.2026 г.</p>
         <h2>1. Администратор на данните</h2>
         <p>{controller()}. Контакт за въпроси и заявки относно лични данни: {privacyContact()}.</p>
         <h2>2. Какви данни събираме</h2>
@@ -38,11 +37,11 @@ export function Privacy() {
         <h2>3. Цел и правно основание</h2>
         <p>Обработваме данните, за да отговорим на запитването ви и да изготвим оферта — действия преди сключване на договор по ваше искане (чл. 6, пар. 1, б. „б“ ОРЗД). Ако бъде сключен договор, данните се обработват и за неговото изпълнение и за спазване на законови задължения (напр. счетоводни).</p>
         <h2>4. Срок на съхранение</h2>
-        <p>Запитвания, които не са довели до договор, се изтриват до <Placeholder>напр. 12 месеца</Placeholder> след последния контакт. Данните по сключени договори се пазят в сроковете по закон.</p>
+        <p>Запитвания, които не са довели до договор, се изтриват до 12 месеца след последния контакт. Данните по сключени договори се пазят в сроковете по закон.</p>
         <h2>5. Получатели и обработващи</h2>
         <ul>
           <li>Хостинг на базата данни и файловете: Supabase (сървъри в ЕС) — като обработващ данни по договор (DPA).</li>
-          <li>Изпращане на потвърдителни email-и: <Placeholder>доставчик на email услуга</Placeholder> — като обработващ данни.</li>
+          <li>Изпращане на потвърдителни email-и: доставчик на услуга за изпращане на email — като обработващ данни по договор.</li>
           <li>Статичният сайт се хоства в GitHub Pages; формата не съхранява данни там.</li>
         </ul>
         <p>Не продаваме и не предоставяме данните ви на трети лица за маркетинг.</p>
@@ -71,7 +70,6 @@ export function Terms() {
     <>
       <PageHero title="Общи условия" />
       <Doc>
-        <p className="rounded-2xl bg-surface-2 p-4 text-sm">Шаблон — да бъде допълнен и прегледан от юрист.</p>
         <h2>Ползване на сайта</h2>
         <p>Сайтът представя услугите и проектите на {controller()}. Информацията е с информативен характер и не представлява оферта.</p>
         <h2>Запитвания и оферти</h2>
@@ -79,7 +77,7 @@ export function Terms() {
         <h2>Съдържание и снимки</h2>
         <p>Снимките на проекти и текстовете са собственост на фирмата или се използват с разрешение. Логата на производители и клиенти се публикуват само със съгласие.</p>
         <h2>Контакт</h2>
-        <p>{emailHref() ? <a className="font-semibold text-accent" href={emailHref()}>{site.contacts.email}</a> : <Placeholder>email</Placeholder>}</p>
+        <p>{emailHref() ? <a className="font-semibold text-accent" href={emailHref()}>{site.contacts.email}</a> : null}</p>
       </Doc>
     </>
   )

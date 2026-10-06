@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import { ButtonLink, ButtonA } from '../../components/ui/Button'
 import { phoneHref, site } from '../../content/site'
 import { track } from '../../lib/analytics'
-import { Placeholder } from '../../components/ui/Chip'
 
 export function Success({ reference, email }: { reference: string; email?: string }) {
   const h = useRef<HTMLHeadingElement>(null)
@@ -25,9 +24,7 @@ export function Success({ reference, email }: { reference: string; email?: strin
       <div className="mt-8 grid gap-3">
         {tel ? (
           <ButtonA href={tel} size="lg" iconLeft="phone" onClick={() => track('phone_click', { from: 'success' })}>Обади се</ButtonA>
-        ) : (
-          <p><Placeholder>Бутон „Обади се“ — добавете телефон</Placeholder></p>
-        )}
+        ) : null}
         <ButtonLink to="/" size="lg" variant="ghost">Към началната страница</ButtonLink>
       </div>
     </div>

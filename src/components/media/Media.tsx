@@ -47,7 +47,7 @@ export function Media({ image, className = '', sizes = '100vw', priority, label 
     <div className={`${pos} overflow-hidden bg-surface-2 ${className}`}>
       <img
         src={asset(placeholderPath(image.tone, image.seed))}
-        alt={image.alt ? `${image.alt} (илюстрация — снимката предстои)` : ''}
+        alt={image.alt ? `${image.alt} (илюстрация)` : ''}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
         fetchPriority={priority ? 'high' : 'auto'}

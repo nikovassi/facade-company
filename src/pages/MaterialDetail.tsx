@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import { getMaterial, materials } from '../content/materials'
 import { projects } from '../content/projects'
 import { documents } from '../content/documents'
@@ -12,7 +12,6 @@ import { DownloadCard } from '../components/cards/DownloadCard'
 import { CtaBand } from '../components/sections/CtaBand'
 import { Breadcrumbs } from '../components/sections/PageHero'
 import { ButtonLink } from '../components/ui/Button'
-import { Placeholder } from '../components/ui/Chip'
 import { Icon } from '../components/ui/Icon'
 import { projectsForMaterial } from '../lib/filters'
 import { breadcrumbLd, serviceLd, useSeo } from '../lib/seo'
@@ -27,15 +26,12 @@ export default function MaterialDetail() {
   return <MaterialView key={m.id} m={m} />
 }
 
-function List({ title, items, empty }: { title: string; items: string[]; empty: string }) {
+function List({ title, items }: { title: string; items: string[] }) {
+  if (!items.length) return null
   return (
     <div className="reveal">
       <h3 className="eyebrow mb-3">{title}</h3>
-      {items.length ? (
-        <ul className="flex flex-wrap gap-2">{items.map((i) => <li key={i} className="rounded-full bg-surface-2 px-4 py-2">{i}</li>)}</ul>
-      ) : (
-        <Placeholder>{empty}</Placeholder>
-      )}
+      <ul className="flex flex-wrap gap-2">{items.map((i) => <li key={i} className="rounded-full bg-surface-2 px-4 py-2">{i}</li>)}</ul>
     </div>
   )
 }
@@ -66,7 +62,7 @@ function MaterialView({ m }: { m: NonNullable<ReturnType<typeof getMaterial>> })
               {related.length > 0 && <ButtonLink to={`/proekti?material=${m.slug}`} size="lg" variant="ghost">Проекти · {related.length}</ButtonLink>}
             </div>
           </div>
-          <Media image={m.cover} priority className="aspect-[4/3] rounded-[28px] reveal-img lg:aspect-[5/4]" label="Placeholder · визия на материала" sizes="(min-width: 768px) 45vw, 100vw" />
+          <Media image={m.cover} priority className="aspect-[4/3] rounded-[28px] reveal-img lg:aspect-[5/4]" sizes="(min-width: 768px) 45vw, 100vw" />
         </div>
       </header>
 
@@ -80,11 +76,11 @@ function MaterialView({ m }: { m: NonNullable<ReturnType<typeof getMaterial>> })
           </ul>
         </div>
         <div className="grid h-fit gap-8">
-          <List title="Приложения" items={m.applications} empty="Приложения" />
-          <List title="Подходящи сгради" items={m.buildingTypes.map((b) => buildingTypeLabels[b])} empty="Типове сгради" />
-          <List title="Възможни покрития" items={m.finishes} empty="Покрития — по каталог на производителя" />
-          <List title="Цветове" items={m.colors} empty="Цветова карта — по каталог на производителя" />
-          <List title="Формати" items={m.formats} empty="Формати — по данни на производителя" />
+          <List title="Приложения" items={m.applications} />
+          <List title="Подходящи сгради" items={m.buildingTypes.map((b) => buildingTypeLabels[b])} />
+          <List title="Възможни покрития" items={m.finishes} />
+          <List title="Цветове" items={m.colors} />
+          <List title="Формати" items={m.formats} />
         </div>
       </section>
 
@@ -102,11 +98,11 @@ function MaterialView({ m }: { m: NonNullable<ReturnType<typeof getMaterial>> })
           </dl>
         ) : (
           <div className="rounded-[22px] border border-dashed border-line p-6 text-ink-2">
-            <Placeholder>Проверени технически данни</Placeholder>
-            <p className="mt-3">Публикуваме само проверени стойности от производителя (дебелина, тегло, клас по реакция на огън, формати). Ако имате нужда от спецификация за конкретен проект — изпратете запитване.</p>
+            <p>Дебелина, формати, цветове и клас по реакция на огън зависят от производителя и системата, избрана за конкретния обект. Изпращаме пълна техническа спецификация заедно с офертата.</p>
+            <Link to={`/zapitvane?ot=material-${m.slug}&usluga=consult&material=${m.slug}`} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-accent">Поискай спецификация <Icon name="arrow" className="h-5 w-5" /></Link>
           </div>
         )}
-        {docs.length > 0 && <ul className="mt-4 grid gap-3 md:grid-cols-2">{docs.map((d) => <li key={d.id}><DownloadCard d={d} /></li>)}</ul>}
+        {docs.filter((d) => d.href).length > 0 && <ul className="mt-4 grid gap-3 md:grid-cols-2">{docs.filter((d) => d.href).map((d) => <li key={d.id}><DownloadCard d={d} /></li>)}</ul>}
       </section>
 
       {m.gallery.length > 0 && (

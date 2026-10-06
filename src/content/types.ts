@@ -92,8 +92,6 @@ export interface Project {
   technicalDocuments?: DocumentItem[]
   featured?: boolean
   isPlaceholder?: boolean
-  /** Real project/photos, but name, city, year or scope still to be supplied → tagged + noindex */
-  detailsPending?: boolean
 }
 
 export interface Material {

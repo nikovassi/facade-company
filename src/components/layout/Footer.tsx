@@ -4,7 +4,6 @@ import { site } from '../../content/site'
 import { services } from '../../content/services'
 import { materials } from '../../content/materials'
 import { ContactActions } from '../sections/ContactActions'
-import { Placeholder } from '../ui/Chip'
 
 export function Footer() {
   const c = site.contacts
@@ -47,12 +46,10 @@ export function Footer() {
           <address className="not-italic text-ink-2">
             {c.address ? (
               <p>гр. {c.address.city}, {c.address.street}</p>
-            ) : (
-              <Placeholder>Адрес на офиса</Placeholder>
-            )}
+            ) : null}
             {c.workingHours && <p className="mt-2">{c.workingHours}</p>}
           </address>
-          {site.legalName ? <p className="mt-4 text-sm text-ink-3">{site.legalName}{site.vatId ? ` · ЕИК ${site.vatId}` : ''}</p> : <p className="mt-4"><Placeholder>Юридическо име и ЕИК</Placeholder></p>}
+          {site.legalName && <p className="mt-4 text-sm text-ink-3">{site.legalName}{site.vatId ? ` · ЕИК ${site.vatId}` : ''}</p>}
           {socials.length > 0 && (
             <ul className="mt-4 flex gap-3">
               {socials.map(([k, v]) => (

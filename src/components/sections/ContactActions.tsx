@@ -1,7 +1,6 @@
 import { emailHref, phoneHref, site } from '../../content/site'
 import { track } from '../../lib/analytics'
 import { Icon, type IconName } from '../ui/Icon'
-import { Placeholder } from '../ui/Chip'
 
 interface Action { key: string; href: string; label: string; sub: string; icon: IconName; event: 'phone_click' | 'email_click' | 'messenger_click' }
 
@@ -20,14 +19,7 @@ export function contactActions(): Action[] {
 
 export function ContactActions({ from, inverse }: { from: string; inverse?: boolean }) {
   const actions = contactActions()
-  if (!actions.length)
-    return (
-      <div className="flex flex-wrap gap-2">
-        <Placeholder>Телефон</Placeholder>
-        <Placeholder>Email</Placeholder>
-        <Placeholder>WhatsApp / Viber (по желание)</Placeholder>
-      </div>
-    )
+  if (!actions.length) return null
   return (
     <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
       {actions.map((a) => (

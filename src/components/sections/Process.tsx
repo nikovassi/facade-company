@@ -1,5 +1,4 @@
 import { site } from '../../content/site'
-import { Placeholder } from '../ui/Chip'
 
 const steps = [
   { t: 'Запитване', d: 'Тип обект, материал, площ и снимки или чертеж — за около минута.' },
@@ -14,9 +13,7 @@ export function Process() {
       <div className="mb-8 max-w-3xl reveal">
         <p className="eyebrow mb-3">Как работим</p>
         <h2 id="process-title" className="h-section">От снимка до готова фасада</h2>
-        <p className="mt-4 text-lg text-ink-2">
-          Отговор на запитване: {site.responseTime ?? <Placeholder>срок за отговор — потвърдете</Placeholder>}
-        </p>
+        {site.responseTime && <p className="mt-4 text-lg text-ink-2">Отговор на запитване: {site.responseTime}</p>}
       </div>
       <ol className="grid gap-3 md:grid-cols-4">
         {steps.map((s, i) => (

@@ -31,7 +31,7 @@
 ├── /uslugi                     Услуги
 │   └── /uslugi/:slug           Услуга (landing page: al-bond-montazh, hpl-fasadi, …)
 ├── /materiali                  Материали
-│   └── /materiali/:slug        Материал (al-bond, hpl, keramika, laminam, drugi)
+│   └── /materiali/:slug        Материал (al-bond, hpl, keramika, drugi)
 ├── /za-proektanti              За архитекти и проектанти (техническа информация, downloads)
 ├── /za-nas                     За нас (trust, сертификати, район на работа)
 ├── /kontakti                   Контакти

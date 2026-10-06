@@ -5,7 +5,6 @@ import { ServiceArea } from '../components/sections/ServiceArea'
 import { Process } from '../components/sections/Process'
 import { CtaBand } from '../components/sections/CtaBand'
 import { Media } from '../components/media/Media'
-import { Placeholder } from '../components/ui/Chip'
 import { breadcrumbLd, organizationLd, useSeo } from '../lib/seo'
 
 export default function About() {
@@ -25,7 +24,7 @@ export default function About() {
             {site.foundedYear ? `От ${site.foundedYear} г. ` : ''}Работим с алуминиеви композитни панели, HPL и керамични плочи — за нови сгради и реконструкции.
           </p>
           <p className="mt-4 text-ink-2">
-            <Placeholder>История на фирмата</Placeholder> — 2–3 изречения: кога е основана, какъв е екипът, с какви обекти се гордеете.
+            {site.legalName} е основана през {site.foundedYear} г. със седалище в София. Проектираме, доставяме и монтираме вентилируеми и окачени фасади — от жилищни сгради и еднофамилни къщи до търговски обекти. Работим в София и региона.
           </p>
         </div>
       </section>

@@ -1,5 +1,5 @@
 /** Visual tone of the generated placeholder (material look). */
-export type ArtTone = 'acp-silver' | 'acp-graphite' | 'acp-bronze' | 'hpl-wood' | 'hpl-dark' | 'ceramic-stone' | 'ceramic-light' | 'laminam' | 'mixed' | 'old-plaster'
+export type ArtTone = 'acp-silver' | 'acp-graphite' | 'acp-bronze' | 'hpl-wood' | 'hpl-dark' | 'ceramic-stone' | 'ceramic-light' | 'ceramic-slab' | 'mixed' | 'old-plaster'
 
 /**
  * Procedural facade illustration, used ONLY as a clearly-labelled placeholder until real
@@ -24,7 +24,7 @@ const P: Record<Exclude<ArtTone, 'mixed'>, Palette> = {
   'hpl-dark': { panels: ['#2e3135', '#34373b', '#2a2c30'], joint: '#141517', pattern: 'plank', cols: 10, rows: 6 },
   'ceramic-stone': { panels: ['#b8b1a5', '#c2bbaf', '#ada699', '#bcb5a9'], joint: '#857f75', pattern: 'tile', cols: 8, rows: 14 },
   'ceramic-light': { panels: ['#e1dcd3', '#d7d2c9', '#eae6de', '#dcd7ce'], joint: '#aea89e', pattern: 'tile', cols: 8, rows: 14 },
-  laminam: { panels: ['#d8d5cf', '#cecbc5', '#d3d0ca'], joint: '#9f9b95', pattern: 'slab', cols: 4, rows: 5 },
+  'ceramic-slab': { panels: ['#d8d5cf', '#cecbc5', '#d3d0ca'], joint: '#9f9b95', pattern: 'slab', cols: 4, rows: 5 },
   'old-plaster': { panels: ['#c7b89f', '#bdad92', '#cdbfa7'], joint: '#a3937a', pattern: 'plaster', cols: 6, rows: 8 },
 }
 

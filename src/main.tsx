@@ -24,7 +24,12 @@ initAnalytics()
 
 // After a new deploy an already-open tab may request a JS chunk that no longer exists.
 // Reload once to pick up the current version instead of showing a broken page.
+// Firefox aborts in-flight chunk loads when the user navigates away — that is not a stale deploy.
+let leaving = false
+window.addEventListener('pagehide', () => { leaving = true })
+window.addEventListener('beforeunload', () => { leaving = true })
 window.addEventListener('vite:preloadError', (e) => {
+  if (leaving) return
   try {
     if (sessionStorage.getItem('chunk-reload')) return
     sessionStorage.setItem('chunk-reload', '1')

@@ -4,7 +4,6 @@ import { PageHero } from '../components/sections/PageHero'
 import { ContactActions } from '../components/sections/ContactActions'
 import { ServiceArea } from '../components/sections/ServiceArea'
 import { ButtonLink } from '../components/ui/Button'
-import { Placeholder } from '../components/ui/Chip'
 import { Icon } from '../components/ui/Icon'
 import { breadcrumbLd, localBusinessLd, useSeo } from '../lib/seo'
 
@@ -45,8 +44,8 @@ export default function Contact() {
         <div>
           <h2 className="mb-4 text-2xl">Офис</h2>
           <address className="not-italic text-lg text-ink-2">
-            {c.address ? <p>{[c.address.postalCode, `гр. ${c.address.city}`].filter(Boolean).join(' ')}<br />{c.address.street}</p> : <Placeholder>Адрес на офиса</Placeholder>}
-            <p className="mt-3">{c.workingHours ?? <Placeholder>Работно време</Placeholder>}</p>
+            {c.address ? <p>{[c.address.postalCode, `гр. ${c.address.city}`].filter(Boolean).join(' ')}<br />{c.address.street}</p> : null}
+            {c.workingHours && <p className="mt-3">Работно време: {c.workingHours}</p>}
           </address>
           {c.address && (
             <a className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-accent" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${c.address.street}, ${c.address.city}`)}`} target="_blank" rel="noopener noreferrer">

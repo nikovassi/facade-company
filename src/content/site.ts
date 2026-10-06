@@ -27,7 +27,7 @@ export const site = {
     whatsapp: null as string | null,
     viber: null as string | null,
     address: { street: 'р-н Красна поляна, бл. 15, вх. А, ет. 4', city: 'София' } as { street: string; city: string; postalCode?: string } | null,
-    workingHours: null as string | null,
+    workingHours: '08:00 – 18:00' as string | null,
   },
 
   social: {
@@ -47,9 +47,8 @@ export const site = {
   responseTime: null as string | null,
 
   serviceArea: {
-    /** e.g. "Цяла България" — confirm with the company */
-    summary: null as string | null,
-    cities: [] as string[],
+    summary: 'София и региона' as string | null,
+    cities: ['София'] as string[],
     international: [] as string[],
   },
 
@@ -61,22 +60,17 @@ export const site = {
 
   /** Facts for the trust section. value: null → placeholder (never invent numbers). */
   trustFacts: [
-    { id: 'years', value: null, suffix: '+', label: 'години опит' },
-    { id: 'projects', value: null, suffix: '+', label: 'изпълнени обекта' },
-    { id: 'area', value: null, suffix: ' m²', label: 'монтирана фасада' },
-    { id: 'warranty', value: null, suffix: ' г.', label: 'гаранция за монтаж' },
+    { id: 'years', value: 8, suffix: '+', label: 'години опит' },
+    { id: 'clients', value: 100, suffix: '+', label: 'доволни клиенти' },
+    { id: 'projects', value: 500, suffix: '+', label: 'завършени обекта' },
   ] satisfies TrustFact[],
 
   /** Logos of clients / partners / manufacturers — only with written permission. */
   partners: [] as { name: string; logo: string; href?: string }[],
 }
 
-export const certificates: Certificate[] = [
-  { id: 'iso-9001', title: 'ISO 9001', issuer: 'Сертифициращ орган — placeholder', kind: 'iso', isPlaceholder: true },
-  { id: 'ipaf', title: 'IPAF', issuer: 'Работа с подемна техника — placeholder', kind: 'safety', isPlaceholder: true },
-  { id: 'manufacturer', title: 'Сертификат от производител', issuer: 'Производител на панели — placeholder', kind: 'manufacturer', isPlaceholder: true },
-  { id: 'training', title: 'Обучение за монтаж', issuer: 'Системен доставчик — placeholder', kind: 'training', isPlaceholder: true },
-]
+/** Add real certificates (ISO, IPAF, manufacturer trainings) here — the section appears automatically. */
+export const certificates: Certificate[] = []
 
 export const hasPhone = () => Boolean(site.contacts.phone)
 export const phoneHref = () => (site.contacts.phone ? `tel:${site.contacts.phone}` : undefined)
