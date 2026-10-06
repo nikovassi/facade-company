@@ -6,25 +6,27 @@ import type { Certificate, ImageAsset, TrustFact, VideoAsset } from './types'
  * Replace with real, verified data before launch.
  */
 export const site = {
-  /** Working brand name — replace with the real company name and logo (public/logo.svg). */
-  brand: 'FACADE',
+  /** Source: recom.bg (НАЧАЛО, КОНТАКТИ) */
+  brand: 'РЕКОМ ГРУП',
   brandTagline: 'фасадни системи',
-  legalName: null as string | null,
-  vatId: null as string | null,
-  foundedYear: null as number | null,
+  legalName: 'РЕКОМ ГРУП ЕООД' as string | null,
+  /** ЕИК */
+  vatId: '204601228' as string | null,
+  /** Founded 19 May 2017 (recom.bg) */
+  foundedYear: 2017 as number | null,
 
   url: (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || 'https://nikovassi.github.io/facade-company',
 
   contacts: {
     /** E.164 format, e.g. "+359888123456" */
-    phone: null as string | null,
-    phoneDisplay: null as string | null,
-    email: null as string | null,
-    privacyEmail: null as string | null,
+    phone: '+359888527137' as string | null,
+    phoneDisplay: '0888 527 137' as string | null,
+    email: 'office@recom.bg' as string | null,
+    privacyEmail: 'office@recom.bg' as string | null,
     /** Number in international format without "+" for wa.me links */
     whatsapp: null as string | null,
     viber: null as string | null,
-    address: null as { street: string; city: string; postalCode?: string } | null,
+    address: { street: 'р-н Красна поляна, бл. 15, вх. А, ет. 4', city: 'София' } as { street: string; city: string; postalCode?: string } | null,
     workingHours: null as string | null,
   },
 

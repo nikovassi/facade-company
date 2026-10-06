@@ -26,7 +26,7 @@ export default function Contact() {
             <span className="block text-3xl font-semibold">Пълно запитване</span>
             <span className="mt-2 block opacity-85">7 кратки стъпки · файлове и снимки · около 1 минута</span>
           </span>
-          <span className="inline-flex items-center gap-2 font-semibold">Започни <Icon name="arrow" className="transition-transform group-hover:translate-x-1" /></span>
+          <span className="inline-flex items-center gap-2 font-semibold">Започни <Icon name="arrow" className="h-5 w-5 transition-transform group-hover:translate-x-1" /></span>
         </Link>
         <Link to="/zapitvane?rezhim=barzo&ot=kontakti" className="group flex flex-col justify-between gap-10 rounded-[28px] border border-line bg-surface p-6 md:p-8">
           <Icon name="bolt" className="h-8 w-8 text-accent" />
@@ -34,7 +34,7 @@ export default function Contact() {
             <span className="block text-3xl font-semibold">Бързо запитване</span>
             <span className="mt-2 block text-ink-2">Име, телефон, град и снимка — ще ви се обадим</span>
           </span>
-          <span className="inline-flex items-center gap-2 font-semibold">Изпрати <Icon name="arrow" className="transition-transform group-hover:translate-x-1" /></span>
+          <span className="inline-flex items-center gap-2 font-semibold">Изпрати <Icon name="arrow" className="h-5 w-5 transition-transform group-hover:translate-x-1" /></span>
         </Link>
       </section>
       <section className="container-x mt-10 grid gap-8 md:grid-cols-2">
@@ -45,7 +45,7 @@ export default function Contact() {
         <div>
           <h2 className="mb-4 text-2xl">Офис</h2>
           <address className="not-italic text-lg text-ink-2">
-            {c.address ? <p>{c.address.street}<br />{c.address.postalCode} {c.address.city}</p> : <Placeholder>Адрес на офиса</Placeholder>}
+            {c.address ? <p>{[c.address.postalCode, `гр. ${c.address.city}`].filter(Boolean).join(' ')}<br />{c.address.street}</p> : <Placeholder>Адрес на офиса</Placeholder>}
             <p className="mt-3">{c.workingHours ?? <Placeholder>Работно време</Placeholder>}</p>
           </address>
           {c.address && (

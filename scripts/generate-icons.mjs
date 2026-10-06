@@ -33,7 +33,7 @@ const og = `
   <text x="72" y="250" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700" fill="#f4f2ee" letter-spacing="-2">Фасадни решения</text>
   <text x="72" y="330" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#f08a52">Al Bond • HPL • Керамика</text>
   <text x="72" y="400" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#b7b4ae">Проектиране, доставка и монтаж на фасадни системи</text>
-  <text x="72" y="560" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#f4f2ee" letter-spacing="6">FACADE</text>
+  <text x="72" y="560" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#f4f2ee" letter-spacing="4">РЕКОМ ГРУП</text>
 </svg>`
 await sharp(Buffer.from(og)).png({ compressionLevel: 9 }).toFile('public/og-image.png')
 console.log('icons + og-image generated')

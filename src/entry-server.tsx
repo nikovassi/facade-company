@@ -45,6 +45,6 @@ export async function render(url: string) {
     </StrictMode>,
   )
   const html = await new Response(prelude).text()
-  const head = ctx.head ?? fallbackHead[url] ?? { title: 'FACADE', description: '', path: url }
+  const head = ctx.head ?? fallbackHead[url] ?? { title: 'РЕКОМ ГРУП', description: '', path: url }
   return { html, head: renderHead(head) }
 }

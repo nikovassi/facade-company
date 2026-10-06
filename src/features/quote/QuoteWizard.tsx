@@ -298,7 +298,7 @@ export function QuoteWizard({ prefill, source }: { prefill: LeadDraft; source: s
                   <div>
                     {data.gps ? (
                       <div className="flex items-center justify-between gap-3 rounded-2xl border border-line bg-surface p-4">
-                        <span className="flex items-center gap-3"><Icon name="pin" className="text-accent" /> Локацията е добавена{data.gps.accuracy ? ` (±${data.gps.accuracy} m)` : ''}</span>
+                        <span className="flex items-center gap-3"><Icon name="pin" className="h-5 w-5 shrink-0 text-accent" /> Локацията е добавена{data.gps.accuracy ? ` (±${data.gps.accuracy} m)` : ''}</span>
                         <button type="button" className="min-h-11 px-2 font-semibold text-accent" onClick={() => update({ gps: null })}>Премахни</button>
                       </div>
                     ) : (

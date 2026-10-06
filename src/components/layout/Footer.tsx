@@ -46,7 +46,7 @@ export function Footer() {
           <h2 className="eyebrow mb-3">Контакти</h2>
           <address className="not-italic text-ink-2">
             {c.address ? (
-              <p>{c.address.street}, {c.address.postalCode} {c.address.city}</p>
+              <p>гр. {c.address.city}, {c.address.street}</p>
             ) : (
               <Placeholder>Адрес на офиса</Placeholder>
             )}

@@ -23,8 +23,8 @@ export default defineConfig(({ mode, isSsrBuild }) => {
         injectRegister: false,
         includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'offline.html'],
         manifest: {
-          name: 'FACADE — фасадни системи',
-          short_name: 'FACADE',
+          name: 'РЕКОМ ГРУП — фасадни системи',
+          short_name: 'РЕКОМ ГРУП',
           description: 'Проектиране, доставка и монтаж на фасадни облицовки и вентилируеми фасади.',
           lang: 'bg',
           start_url: base,
