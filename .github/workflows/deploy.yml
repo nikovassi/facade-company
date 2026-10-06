@@ -54,8 +54,8 @@ jobs:
         # E2E uses its own build (dist-e2e) with a stubbed lead endpoint, served like GitHub Pages
         run: npm run test:e2e
         env:
-          VITE_BASE: /facade-company/
-          VITE_SITE_URL: https://nikovassi.github.io/facade-company
+          VITE_BASE: /recom/
+          VITE_SITE_URL: https://nikovassi.github.io/recom
 
       - name: Upload Playwright report
         if: failure()

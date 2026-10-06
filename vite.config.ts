@@ -8,8 +8,8 @@ import { githubPagesPreview, placeholderDev, prerender } from './scripts/prerend
 // GitHub Pages serves the site under /<repo>/. Override with VITE_BASE=/ for a custom domain.
 export default defineConfig(({ mode, isSsrBuild }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const base = env.VITE_BASE || '/facade-company/'
-  const siteUrl = env.VITE_SITE_URL || 'https://nikovassi.github.io/facade-company'
+  const base = env.VITE_BASE || '/recom/'
+  const siteUrl = env.VITE_SITE_URL || 'https://nikovassi.github.io/recom'
   return {
     base,
     plugins: [

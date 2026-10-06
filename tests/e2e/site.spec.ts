@@ -21,7 +21,7 @@ test('SEO: title, description, canonical, structured data', async ({ page, reque
   await page.goto('./')
   await expect(page).toHaveTitle(/Al Bond, HPL/)
   await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /фасад/)
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://nikovassi.github.io/facade-company/')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://nikovassi.github.io/recom/')
   const types = await page.locator('script[type="application/ld+json"]').evaluateAll((els) => els.map((e) => JSON.parse(e.textContent!)['@type']).flat())
   expect(types).toEqual(expect.arrayContaining(['Organization', 'LocalBusiness', 'WebSite']))
   await page.goto('uslugi/hpl-fasadi')
@@ -49,7 +49,7 @@ test('deep links work under the repository base path', async ({ page }) => {
   await page.goto('materiali/hpl')
   await expect(page.getByRole('heading', { level: 1, name: 'HPL' })).toBeVisible()
   await page.getByRole('link', { name: /Поискай оферта за HPL/ }).click()
-  await expect(page).toHaveURL(/\/facade-company\/zapitvane\?.*material=hpl/)
+  await expect(page).toHaveURL(/\/recom\/zapitvane\?.*material=hpl/)
 })
 
 test('dark mode toggle persists', async ({ page }) => {
@@ -81,13 +81,13 @@ test.describe('PWA', () => {
 
   test('PWA: manifest, icons and service worker', async ({ page, request, browserName }) => {
     const manifest = await (await request.get('manifest.webmanifest')).json()
-    expect(manifest.start_url).toBe('/facade-company/')
+    expect(manifest.start_url).toBe('/recom/')
     expect(manifest.icons.length).toBeGreaterThanOrEqual(3)
     for (const i of manifest.icons) expect((await request.get(i.src)).status()).toBe(200)
     test.skip(browserName !== 'chromium', 'service worker check runs on Chromium')
     await page.goto('./')
     const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope)
-    expect(scope).toContain('/facade-company/')
+    expect(scope).toContain('/recom/')
   })
 })
 

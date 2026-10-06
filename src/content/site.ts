@@ -15,7 +15,7 @@ export const site = {
   /** Founded 19 May 2017 (recom.bg) */
   foundedYear: 2017 as number | null,
 
-  url: (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || 'https://nikovassi.github.io/facade-company',
+  url: (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || 'https://nikovassi.github.io/recom',
 
   contacts: {
     /** E.164 format, e.g. "+359888123456" */

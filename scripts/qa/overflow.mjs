@@ -4,7 +4,7 @@ const b = await chromium.launch()
 const ctx = await b.newContext({ viewport: { width: +w, height: 844 }, isMobile: true, hasTouch: true })
 const page = await ctx.newPage()
 for (const p of pagesArg.split(',')) {
-  await page.goto(`http://localhost:4380/facade-company${p}`, { waitUntil: 'networkidle' })
+  await page.goto(`http://localhost:4380/recom${p}`, { waitUntil: 'networkidle' })
   const r = await page.evaluate(() => {
     const W = document.documentElement.clientWidth
     const off = [...document.querySelectorAll('body *')].filter((e) => { const r = e.getBoundingClientRect(); return r.right > W + 1 && getComputedStyle(e).position !== 'fixed' && !e.closest('.snap-row') && !e.closest('.sr-only') })

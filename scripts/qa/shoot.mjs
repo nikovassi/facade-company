@@ -9,7 +9,7 @@ for (const v of vpArg.split(',')) {
   page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errors.push(`[${v}] ${page.url()} ${m.type()}: ${m.text()}`) })
   page.on('pageerror', (e) => errors.push(`[${v}] ${page.url()} pageerror: ${e.message}`))
   for (const p of pagesArg.split(',')) {
-    await page.goto(`http://localhost:4380/facade-company${p}`, { waitUntil: 'networkidle' })
+    await page.goto(`http://localhost:4380/recom${p}`, { waitUntil: 'networkidle' })
     await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)) } window.scrollTo(0, 0) })
     await page.waitForTimeout(300)
     const name = `${out}/${v}-${scheme}-${p.replace(/[/?=&]/g, '_') || 'home'}.png`

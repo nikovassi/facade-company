@@ -37,7 +37,7 @@ Mobile-first, prerendered PWA за фирма за проектиране, до�
 
 ```bash
 npm install
-npm run dev          # http://localhost:5173/facade-company/
+npm run dev          # http://localhost:5173/recom/
 npm run build        # SSR bundle → client build → prerender 35 routes → service worker
 npm run preview      # сервира dist/ като GitHub Pages (clean URLs, 404.html със статус 404, gzip)
 npm run lint         # ESLint + tsc
@@ -137,7 +137,7 @@ GDPR: изтриване по заявка — `select erase_lead('REQ-2026-0042
 
 ## Deployment (GitHub Pages)
 
-1. Създайте repository (напр. `facade-company`) и push-нете `main`.
+1. Създайте repository (напр. `recom`) и push-нете `main`.
 2. Settings → Pages → Source: **GitHub Actions**.
 3. `.github/workflows/deploy.yml`: checkout → Node 20 → `npm ci` → lint → unit tests → Playwright (Chromium, WebKit,
    Firefox) → build → deploy. Base path се взима от името на repository-то (`/<repo>/`); за custom domain задайте

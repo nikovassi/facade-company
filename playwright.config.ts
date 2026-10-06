@@ -9,7 +9,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   use: {
-    baseURL: `http://localhost:${PORT}/facade-company/`,
+    baseURL: `http://localhost:${PORT}/recom/`,
     trace: 'retain-on-failure',
     locale: 'bg-BG',
     // page.route() cannot see requests that pass through a controlling service worker (WebKit/Firefox).
@@ -25,7 +25,7 @@ export default defineConfig({
   // Production build with a test endpoint (intercepted in the tests) served like GitHub Pages
   webServer: {
     command: 'npm run build:e2e && npm run preview:e2e',
-    url: `http://localhost:${PORT}/facade-company/`,
+    url: `http://localhost:${PORT}/recom/`,
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
   },
