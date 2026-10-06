@@ -34,7 +34,7 @@ function ServiceView({ s }: { s: NonNullable<ReturnType<typeof getService>> }) {
     jsonLd: [serviceLd({ ...s, path }), breadcrumbLd([{ name: 'Начало', path: '/' }, { name: 'Услуги', path: '/uslugi' }, { name: s.name, path }])],
   })
   const related = projectsForService(projects, s.slug)
-  const mat = s.materials?.length === 1 ? `&material=${s.materials[0]}` : ''
+  const mat = s.group === 'metal' ? '&material=metal' : s.materials?.length === 1 ? `&material=${s.materials[0]}` : ''
   const q = `/zapitvane?ot=usluga-${s.slug}${quoteService[s.slug] ? `&usluga=${quoteService[s.slug]}` : ''}${mat}`
   const others = services.filter((x) => x.slug !== s.slug && x.group === s.group).slice(0, 4)
 
@@ -49,7 +49,7 @@ function ServiceView({ s }: { s: NonNullable<ReturnType<typeof getService>> }) {
           <p className="mt-4 max-w-2xl text-lg text-white/85 anim-rise md:text-xl" style={{ ['--d' as string]: '100ms' }}>{s.shortDescription}</p>
           <div className="mt-7 flex flex-col gap-3 anim-rise sm:flex-row" style={{ ['--d' as string]: '180ms' }}>
             <ButtonLink to={q} size="lg" icon="arrow" cta={`service-${s.slug}`}>Поискай оферта</ButtonLink>
-            <ButtonLink to={`/proekti?service=${s.slug}`} size="lg" variant="outline-inverse">Виж проектите</ButtonLink>
+            {related.length > 0 && <ButtonLink to={`/proekti?service=${s.slug}`} size="lg" variant="outline-inverse">Виж проектите</ButtonLink>}
           </div>
         </div>
       </header>

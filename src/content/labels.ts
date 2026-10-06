@@ -39,4 +39,9 @@ export const serviceLabels: Record<ServiceKey, string> = {
   dostavka: 'Доставка',
   montazh: 'Монтаж',
   'rekonstrukciya-na-fasadi': 'Реконструкция',
+  'metalni-stalbishta-i-parapeti': 'Стълбища и парапети',
+  'zimni-gradini': 'Зимни градини',
+  'navesi-i-kozirki': 'Навеси и козирки',
+  'industrialni-haleta': 'Индустриални халета',
+  'metalni-vrati-i-ogradi': 'Врати и огради',
 }

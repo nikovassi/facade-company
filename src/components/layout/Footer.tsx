@@ -22,7 +22,7 @@ export function Footer() {
         <nav aria-label="Услуги">
           <h2 className="eyebrow mb-3">Услуги</h2>
           <ul>
-            {services.slice(0, 7).map((s) => (
+            {services.filter((s) => s.group !== 'metal').slice(0, 7).map((s) => (
               <li key={s.slug}><Link className={linkCls} to={`/uslugi/${s.slug}`}>{s.name}</Link></li>
             ))}
           </ul>
@@ -32,6 +32,12 @@ export function Footer() {
           <ul>
             {materials.map((m) => (
               <li key={m.slug}><Link className={linkCls} to={`/materiali/${m.slug}`}>{m.name}</Link></li>
+            ))}
+          </ul>
+          <h2 className="eyebrow mb-3 mt-6">Метални конструкции</h2>
+          <ul>
+            {services.filter((s) => s.group === 'metal').map((s) => (
+              <li key={s.slug}><Link className={linkCls} to={`/uslugi/${s.slug}`}>{s.name}</Link></li>
             ))}
           </ul>
           <h2 className="eyebrow mb-3 mt-6">Още</h2>

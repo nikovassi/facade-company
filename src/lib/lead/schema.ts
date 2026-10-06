@@ -25,6 +25,7 @@ export const materialOptions = opts([
   { value: 'al-bond', label: 'Al Bond' },
   { value: 'hpl', label: 'HPL' },
   { value: 'keramika', label: 'Керамика' },
+  { value: 'metal', label: 'Метална конструкция' },
   { value: 'combo', label: 'Комбинация' },
   { value: 'unsure', label: 'Не съм сигурен' },
 ] as const)

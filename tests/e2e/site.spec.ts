@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import { expectNoBrokenImages, watchErrors } from './helpers'
 
 const ROUTES = ['./', 'proekti', 'uslugi', 'materiali', 'za-proektanti', 'za-nas', 'kontakti', 'zapitvane', 'poveritelnost', 'usloviya', 'biskvitki',
-  'proekti/zhilishtna-sgrada-keramichna-fasada', 'proekti/targovski-obekti-al-bond', 'uslugi/al-bond-montazh', 'uslugi/ventiliruemi-fasadi', 'materiali/al-bond', 'materiali/keramika']
+  'proekti/zhilishtna-sgrada-keramichna-fasada', 'proekti/targovski-obekti-al-bond', 'uslugi/al-bond-montazh', 'uslugi/ventiliruemi-fasadi', 'materiali/al-bond', 'materiali/keramika', 'uslugi/zimni-gradini', 'uslugi/industrialni-haleta', 'uslugi/metalni-vrati-i-ogradi']
 
 test('every route renders without console errors, broken images or horizontal scroll', async ({ page }) => {
   const errors = watchErrors(page)

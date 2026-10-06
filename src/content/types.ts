@@ -26,6 +26,11 @@ export type ServiceKey =
   | 'dostavka'
   | 'montazh'
   | 'rekonstrukciya-na-fasadi'
+  | 'metalni-stalbishta-i-parapeti'
+  | 'zimni-gradini'
+  | 'navesi-i-kozirki'
+  | 'industrialni-haleta'
+  | 'metalni-vrati-i-ogradi'
 
 import type { ArtTone } from '../lib/facadeSvg'
 export type { ArtTone }
@@ -119,7 +124,7 @@ export interface Service {
   id: string
   slug: ServiceKey
   name: string
-  group: 'system' | 'process'
+  group: 'system' | 'process' | 'metal'
   seoTitle: string
   seoDescription: string
   shortDescription: string

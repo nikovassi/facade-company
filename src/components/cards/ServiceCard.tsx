@@ -3,10 +3,10 @@ import type { Service } from '../../content/types'
 import { Media } from '../media/Media'
 import { Icon } from '../ui/Icon'
 
-export function ServiceCard({ s, index }: { s: Service; index?: number }) {
+export function ServiceCard({ s, index, tall }: { s: Service; index?: number; /** keep portrait proportions in narrow (5-col) grids */ tall?: boolean }) {
   return (
     <Link to={`/uslugi/${s.slug}`} className="group relative block h-full overflow-hidden rounded-[24px] bg-[#141517] text-white">
-      <div className="relative aspect-[3/4] sm:aspect-[4/5] lg:aspect-[5/4]">
+      <div className={`relative aspect-[3/4] sm:aspect-[4/5] ${tall ? '' : 'lg:aspect-[5/4]'}`}>
         <Media image={s.cover} className="absolute inset-0 h-full w-full opacity-90 transition-transform duration-[1.2s] group-hover:scale-[1.05]" sizes="(min-width: 1024px) 25vw, 70vw" label={false} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
         {index !== undefined && <span className="tnum absolute left-5 top-5 text-sm font-semibold text-white/70">{String(index + 1).padStart(2, '0')}</span>}

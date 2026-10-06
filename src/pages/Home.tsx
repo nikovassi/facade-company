@@ -23,7 +23,7 @@ import { projectsForMaterial } from '../lib/filters'
 export default function Home() {
   useSeo({
     title: `${site.brand} — фасадни облицовки, Al Bond, HPL и керамични фасади`,
-    description: 'Проектиране, доставка, изработка и монтаж на фасадни облицовки и вентилируеми фасади: Al Bond / Alucobond (ACP), HPL и керамика. Поискайте оферта онлайн.',
+    description: 'Проектиране, доставка, изработка и монтаж на фасадни облицовки и вентилируеми фасади: Al Bond / Alucobond (ACP), HPL и керамика. Метални конструкции, зимни градини и навеси. Поискайте оферта онлайн.',
     path: '/',
     jsonLd: [organizationLd(), localBusinessLd(), websiteLd()],
   })
@@ -94,6 +94,18 @@ export default function Home() {
           ))}
         </div>
         <InlineCta text="Не сте сигурни коя система е подходяща? Ще ви посъветваме." label="Консултация" to="/zapitvane?ot=services&usluga=consult" from="home-services" />
+      </section>
+
+      {/* METAL WORKS */}
+      <section className="pt-16 md:pt-24" aria-labelledby="metal-title">
+        <SectionHead eyebrow="Също изпълняваме" id="metal-title" title="Метални конструкции" intro="Стълбища и парапети, зимни градини, навеси, индустриални халета, врати и огради." link={{ to: '/uslugi#metalni-konstrukcii', label: 'Всички метални конструкции' }} />
+        <ul className="snap-row rail md:grid-cols-3 md:gap-4 lg:grid-cols-5">
+          {services.filter((s) => s.group === 'metal').map((s) => (
+            <li key={s.slug} className="w-[64vw] max-w-xs md:w-auto md:max-w-none">
+              <ServiceCard s={s} tall />
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* MATERIALS */}
