@@ -76,15 +76,19 @@ test('gallery opens fullscreen with next / previous / close', async ({ page }) =
   await expect(page.getByRole('dialog')).toHaveCount(0)
 })
 
-test('PWA: manifest, icons and service worker', async ({ page, request, browserName }) => {
-  const manifest = await (await request.get('manifest.webmanifest')).json()
-  expect(manifest.start_url).toBe('/facade-company/')
-  expect(manifest.icons.length).toBeGreaterThanOrEqual(3)
-  for (const i of manifest.icons) expect((await request.get(i.src)).status()).toBe(200)
-  test.skip(browserName !== 'chromium', 'service worker check runs on Chromium')
-  await page.goto('./')
-  const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope)
-  expect(scope).toContain('/facade-company/')
+test.describe('PWA', () => {
+  test.use({ serviceWorkers: 'allow' })
+
+  test('PWA: manifest, icons and service worker', async ({ page, request, browserName }) => {
+    const manifest = await (await request.get('manifest.webmanifest')).json()
+    expect(manifest.start_url).toBe('/facade-company/')
+    expect(manifest.icons.length).toBeGreaterThanOrEqual(3)
+    for (const i of manifest.icons) expect((await request.get(i.src)).status()).toBe(200)
+    test.skip(browserName !== 'chromium', 'service worker check runs on Chromium')
+    await page.goto('./')
+    const scope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope)
+    expect(scope).toContain('/facade-company/')
+  })
 })
 
 test.describe('mobile', () => {

@@ -12,6 +12,9 @@ export default defineConfig({
     baseURL: `http://localhost:${PORT}/facade-company/`,
     trace: 'retain-on-failure',
     locale: 'bg-BG',
+    // page.route() cannot see requests that pass through a controlling service worker (WebKit/Firefox).
+    // PWA/offline specs opt back in with test.use({ serviceWorkers: 'allow' }).
+    serviceWorkers: 'block',
   },
   projects: [
     { name: 'mobile-chrome', use: { ...devices['Pixel 7'] } },

@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test'
 import { mockLeadEndpoint } from './helpers'
 
 test.describe('offline (PWA)', () => {
+  test.use({ serviceWorkers: 'allow' })
   test.skip(({ browserName }) => browserName !== 'chromium', 'service worker offline emulation is reliable on Chromium')
 
   test('precached pages open offline; unknown pages show the offline screen', async ({ page, context }) => {

@@ -22,6 +22,20 @@ else createRoot(root).render(app)
 
 initAnalytics()
 
+// After a new deploy an already-open tab may request a JS chunk that no longer exists.
+// Reload once to pick up the current version instead of showing a broken page.
+window.addEventListener('vite:preloadError', (e) => {
+  try {
+    if (sessionStorage.getItem('chunk-reload')) return
+    sessionStorage.setItem('chunk-reload', '1')
+  } catch {
+    /* storage unavailable — still reload once */
+  }
+  e.preventDefault()
+  window.location.reload()
+})
+window.addEventListener('load', () => setTimeout(() => { try { sessionStorage.removeItem('chunk-reload') } catch { /* ignore */ } }, 10_000), { once: true })
+
 // Warm the other page chunks when the browser is idle (skip on Save-Data)
 const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection
 if (!conn?.saveData && !/2g|3g/.test(conn?.effectiveType ?? '')) {
