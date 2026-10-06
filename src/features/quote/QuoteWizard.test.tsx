@@ -61,13 +61,13 @@ describe('quote wizard', () => {
   })
 
   it('prefills material and service from the URL', async () => {
-    renderAt('/zapitvane?material=laminam&usluga=consult')
+    renderAt('/zapitvane?material=keramika&usluga=consult')
     await screen.findByText('Стъпка 1 от 7')
     fireEvent.click(screen.getByLabelText('Офис'))
     await next()
     expect(screen.getByLabelText('Консултация')).toBeChecked()
     await next()
-    expect(screen.getByLabelText('Laminam')).toBeChecked()
+    expect(screen.getByLabelText('Керамика')).toBeChecked()
   })
 
   it('validates contact fields inline and submits end to end', async () => {

@@ -12,7 +12,7 @@ import { join, relative, dirname, extname, basename } from 'node:path'
 
 const SRC = 'content-images'
 const OUT = 'public/images'
-const WIDTHS = [480, 800, 1200, 1800]
+const WIDTHS = [480, 800, 1200, 1600] // source photos are ≤ 1600 px
 
 const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]))
 if (!existsSync(SRC)) {

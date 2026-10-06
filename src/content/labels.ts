@@ -25,7 +25,6 @@ export const materialLabels: Record<MaterialKey, string> = {
   'al-bond': 'Al Bond',
   hpl: 'HPL',
   keramika: 'Керамика',
-  laminam: 'Laminam',
   drugi: 'Други материали',
 }
 

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import { expectNoBrokenImages, watchErrors } from './helpers'
 
 const ROUTES = ['./', 'proekti', 'uslugi', 'materiali', 'za-proektanti', 'za-nas', 'kontakti', 'zapitvane', 'poveritelnost', 'usloviya', 'biskvitki',
-  'proekti/primeren-obekt-ofis-sgrada', 'proekti/primeren-obekt-rekonstrukciya', 'uslugi/al-bond-montazh', 'uslugi/ventiliruemi-fasadi', 'materiali/al-bond', 'materiali/laminam']
+  'proekti/zhilishtna-sgrada-keramichna-fasada', 'proekti/targovski-obekti-al-bond', 'uslugi/al-bond-montazh', 'uslugi/ventiliruemi-fasadi', 'materiali/al-bond', 'materiali/keramika']
 
 test('every route renders without console errors, broken images or horizontal scroll', async ({ page }) => {
   const errors = watchErrors(page)
@@ -29,7 +29,8 @@ test('SEO: title, description, canonical, structured data', async ({ page, reque
   expect(t2).toEqual(expect.arrayContaining(['Service', 'BreadcrumbList']))
   const sitemap = await (await request.get('sitemap.xml')).text()
   expect(sitemap).toContain('/uslugi/al-bond-montazh')
-  expect(sitemap).not.toContain('primeren-obekt') // placeholder projects are not indexed
+  expect(sitemap).not.toContain('/proekti/zhilishtna-sgrada-keramichna-fasada') // projects with pending details are not indexed
+  expect(sitemap).not.toContain('laminam')
   expect(await (await request.get('robots.txt')).text()).toContain('Sitemap:')
 })
 
@@ -63,24 +64,16 @@ test('dark mode toggle persists', async ({ page }) => {
 })
 
 test('gallery opens fullscreen with next / previous / close', async ({ page }) => {
-  await page.goto('proekti/primeren-obekt-ofis-sgrada')
+  await page.goto('proekti/zhilishtna-sgrada-al-bond')
   await page.getByRole('button', { name: /Отвори снимка 1/ }).click()
-  const dialog = page.getByRole('dialog', { name: /Галерия, снимка 1 от 4/ })
+  const dialog = page.getByRole('dialog', { name: /Галерия, снимка 1 от 2/ })
   await expect(dialog).toBeVisible()
   await page.getByRole('button', { name: 'Следваща снимка' }).click()
-  await expect(page.getByRole('dialog', { name: /снимка 2 от 4/ })).toBeVisible()
+  await expect(page.getByRole('dialog', { name: /снимка 2 от 2/ })).toBeVisible()
   await page.keyboard.press('ArrowLeft')
-  await expect(page.getByRole('dialog', { name: /снимка 1 от 4/ })).toBeVisible()
+  await expect(page.getByRole('dialog', { name: /снимка 1 от 2/ })).toBeVisible()
   await page.keyboard.press('Escape')
   await expect(page.getByRole('dialog')).toHaveCount(0)
-})
-
-test('before / after slider is keyboard accessible', async ({ page }) => {
-  await page.goto('proekti/primeren-obekt-rekonstrukciya')
-  const slider = page.getByRole('slider', { name: /Сравнение преди и след/ }).first()
-  await slider.focus()
-  await page.keyboard.press('End')
-  await expect(slider).toHaveValue('100')
 })
 
 test('PWA: manifest, icons and service worker', async ({ page, request, browserName }) => {

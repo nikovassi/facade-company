@@ -12,7 +12,6 @@ export const documents: DocumentItem[] = [
   { id: 'd-hpl-spec', title: 'HPL — техническа спецификация', kind: 'pdf', category: 'specification', material: 'hpl', isPlaceholder: true },
   { id: 'd-hpl-cad', title: 'HPL — детайли видим / скрит крепеж', kind: 'dwg', category: 'cad', material: 'hpl', isPlaceholder: true },
   { id: 'd-ceramic-spec', title: 'Керамика — система с клипси', kind: 'pdf', category: 'installation', material: 'keramika', isPlaceholder: true },
-  { id: 'd-laminam-spec', title: 'Laminam — фасадна система', kind: 'pdf', category: 'specification', material: 'laminam', isPlaceholder: true },
   { id: 'd-vent-detail', title: 'Вентилируема фасада — типов разрез', kind: 'dwg', category: 'detail', isPlaceholder: true },
   { id: 'd-certs', title: 'Сертификати и декларации за експлоатационни показатели', kind: 'zip', category: 'certificate', isPlaceholder: true },
 ]

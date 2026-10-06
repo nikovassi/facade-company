@@ -31,7 +31,7 @@ const og = `
   <rect width="1200" height="630" fill="url(#g)"/>
   <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0.35" stop-color="#141517"/><stop offset="1" stop-color="#141517" stop-opacity="0.2"/></linearGradient></defs>
   <text x="72" y="250" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700" fill="#f4f2ee" letter-spacing="-2">Фасадни решения</text>
-  <text x="72" y="330" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#f08a52">Al Bond • HPL • Керамика • Laminam</text>
+  <text x="72" y="330" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#f08a52">Al Bond • HPL • Керамика</text>
   <text x="72" y="400" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#b7b4ae">Проектиране, доставка и монтаж на фасадни системи</text>
   <text x="72" y="560" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#f4f2ee" letter-spacing="6">FACADE</text>
 </svg>`

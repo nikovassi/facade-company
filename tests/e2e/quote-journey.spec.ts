@@ -20,8 +20,8 @@ test('main journey: projects → case study → quote → upload → success', a
   // filter + open project
   await page.getByRole('button', { name: /^HPL/ }).click()
   await expect(page).toHaveURL(/material=hpl/)
-  await page.getByRole('link', { name: /Пловдив · Жилищна сграда/ }).first().click()
-  await expect(page.getByRole('heading', { level: 1, name: 'Жилищна сграда' })).toBeVisible()
+  await page.getByRole('link', { name: /Фасади от HPL с дървесен декор/ }).first().click()
+  await expect(page.getByRole('heading', { level: 1, name: 'Фасади от HPL с дървесен декор' })).toBeVisible()
 
   // → Request quote from the case study CTA
   await page.getByRole('region', { name: 'Запитване за оферта' }).getByRole('link', { name: /Поискай оферта/ }).click()
@@ -82,7 +82,7 @@ test('main journey: projects → case study → quote → upload → success', a
   expect(captured[0].body).toContain('"kind":"full"')
   expect(captured[0].body).toContain('"materials":["hpl"]')
   expect(captured[0].body).toContain('filename="sgrada.png"')
-  expect(captured[0].body).toContain('"source":"project-primeren-obekt-zhilishtna-sgrada"')
+  expect(captured[0].body).toContain('"source":"project-hpl-fasadi-darvesen-dekor"')
 
   // the core principle: home → sent in well under 60 s (automation is faster, but guards regressions)
   expect(Date.now() - t0).toBeLessThan(60_000)

@@ -37,7 +37,7 @@ export const site = {
 
   /** Hero visual. Replace with a real facade photo (and optional short video with poster). */
   hero: {
-    image: { alt: 'Фасада от алуминиеви композитни панели', tone: 'acp-graphite', seed: 7 } as ImageAsset,
+    image: { src: 'images/projects/keramika-zhilishtna/cover', alt: 'Вентилируема керамична фасада, изпълнена от РЕКОМ ГРУП' } as ImageAsset,
     video: null as VideoAsset | null,
   },
 

@@ -47,7 +47,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
           // App shell + static content only. Lead submissions are never cached.
           globPatterns: ['**/*.{js,css,html,svg,png,webp,avif,woff2,webmanifest}'],
           // Nested index.html files duplicate the flat route.html files; placeholders are runtime-cached.
-          globIgnores: ['admin.html', '**/admin/**', '**/assets/Admin*', '**/*greek*', '**/*vietnamese*', '**/*italic*', '**/*/index.html', 'placeholders/**', 'og-image.png', 'proekti/**', 'uslugi/**', 'materiali/**', '404.html'],
+          globIgnores: ['admin.html', '**/admin/**', '**/assets/Admin*', '**/*greek*', '**/*vietnamese*', '**/*italic*', '**/*/index.html', 'placeholders/**', 'images/**', 'og-image.png', 'proekti/**', 'uslugi/**', 'materiali/**', '404.html'],
           // Every route is prerendered + precached; unknown pages go to the network,
           // and only when offline the static offline page is shown.
           navigateFallback: null,

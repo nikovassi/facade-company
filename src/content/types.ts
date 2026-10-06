@@ -4,7 +4,7 @@
  * and must be replaced with real, verified company data before launch.
  */
 
-export type MaterialKey = 'al-bond' | 'hpl' | 'keramika' | 'laminam' | 'drugi'
+export type MaterialKey = 'al-bond' | 'hpl' | 'keramika' | 'drugi'
 
 export type BuildingType =
   | 'residential'
@@ -72,6 +72,7 @@ export interface Project {
   id: string
   slug: string
   title: string
+  /** city: '' = not provided yet (shown as a placeholder, excluded from filters) */
   location: { city: string; region?: string; country?: string }
   year?: number
   type: BuildingType
@@ -91,6 +92,8 @@ export interface Project {
   technicalDocuments?: DocumentItem[]
   featured?: boolean
   isPlaceholder?: boolean
+  /** Real project/photos, but name, city, year or scope still to be supplied → tagged + noindex */
+  detailsPending?: boolean
 }
 
 export interface Material {

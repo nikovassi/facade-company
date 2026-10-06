@@ -155,7 +155,7 @@ export const projectLd = (p: Project) => ({
   description: p.summary,
   url: absoluteUrl(`/proekti/${p.slug}`),
   creator: { '@id': orgId },
-  locationCreated: { '@type': 'Place', name: p.location.city },
+  ...(p.location.city ? { locationCreated: { '@type': 'Place', name: p.location.city } } : {}),
   keywords: [...p.materials.map((m) => materialLabels[m]), buildingTypeSingular[p.type]].join(', '),
   ...(p.year ? { dateCreated: String(p.year) } : {}),
 })

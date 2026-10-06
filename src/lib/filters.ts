@@ -24,7 +24,7 @@ export function filterOptions(list: Project[]) {
     materials: uniq(list.flatMap((p) => p.materials)),
     types: uniq(list.map((p) => p.type)),
     services: uniq(list.flatMap((p) => p.services)),
-    cities: uniq(list.map((p) => p.location.city)).sort((a, b) => a.localeCompare(b, 'bg')),
+    cities: uniq(list.map((p) => p.location.city).filter(Boolean)).sort((a, b) => a.localeCompare(b, 'bg')),
   }
 }
 

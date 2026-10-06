@@ -23,7 +23,7 @@ import { projectsForMaterial } from '../lib/filters'
 export default function Home() {
   useSeo({
     title: `${site.brand} — фасадни облицовки, Al Bond, HPL и керамични фасади`,
-    description: 'Проектиране, доставка, изработка и монтаж на фасадни облицовки и вентилируеми фасади: Al Bond / Alucobond (ACP), HPL, керамика и Laminam. Поискайте оферта онлайн.',
+    description: 'Проектиране, доставка, изработка и монтаж на фасадни облицовки и вентилируеми фасади: Al Bond / Alucobond (ACP), HPL и керамика. Поискайте оферта онлайн.',
     path: '/',
     jsonLd: [organizationLd(), localBusinessLd(), websiteLd()],
   })
@@ -39,7 +39,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/30" aria-hidden="true" />
         <div className="container-x relative pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-28 lg:pb-20">
           <p className="anim-rise text-[0.9375rem] font-semibold tracking-[0.08em] text-white/85" style={{ ['--d' as string]: '80ms' }}>
-            Al Bond <span className="text-[#f08a52]">•</span> HPL <span className="text-[#f08a52]">•</span> Керамика <span className="text-[#f08a52]">•</span> Laminam
+            Al Bond <span className="text-[#f08a52]">•</span> HPL <span className="text-[#f08a52]">•</span> Керамика
           </p>
           <h1 id="hero-title" className="display mt-4 max-w-5xl anim-rise" style={{ ['--d' as string]: '160ms' }}>
             Фасадни решения

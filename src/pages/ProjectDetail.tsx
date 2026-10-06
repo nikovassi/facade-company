@@ -5,7 +5,7 @@ import { buildingTypeSingular, materialLabels, serviceLabels } from '../content/
 import { Media } from '../components/media/Media'
 import { Gallery } from '../components/media/Gallery'
 import { BeforeAfter } from '../components/media/BeforeAfter'
-import { ProjectCard } from '../components/cards/ProjectCard'
+import { PendingTag, ProjectCard } from '../components/cards/ProjectCard'
 import { DownloadCard } from '../components/cards/DownloadCard'
 import { CtaBand } from '../components/sections/CtaBand'
 import { Breadcrumbs } from '../components/sections/PageHero'
@@ -27,15 +27,15 @@ export default function ProjectDetail() {
 
 function ProjectView({ p }: { p: NonNullable<ReturnType<typeof getProject>> }) {
   useSeo({
-    title: `${p.title}, ${p.location.city} — ${p.materials.map((m) => materialLabels[m]).join(' + ')}`,
-    description: `${p.summary} ${buildingTypeSingular[p.type]} в ${p.location.city}. Материали: ${p.materials.map((m) => materialLabels[m]).join(', ')}.`,
+    title: `${p.title}${p.location.city ? `, ${p.location.city}` : ''} — ${p.materials.map((m) => materialLabels[m]).join(' + ')}`,
+    description: `${p.summary} ${buildingTypeSingular[p.type]}${p.location.city ? ` в ${p.location.city}` : ''}. Материали: ${p.materials.map((m) => materialLabels[m]).join(', ')}.`,
     path: `/proekti/${p.slug}`,
-    noindex: p.isPlaceholder,
+    noindex: p.isPlaceholder || p.detailsPending,
     jsonLd: [projectLd(p), breadcrumbLd([{ name: 'Начало', path: '/' }, { name: 'Проекти', path: '/proekti' }, { name: p.title, path: `/proekti/${p.slug}` }])],
   })
   const related = relatedProjects(projects, p)
   const facts: [string, React.ReactNode][] = [
-    ['Локация', p.location.city],
+    ['Локация', p.location.city || <Placeholder>град</Placeholder>],
     ['Тип обект', buildingTypeSingular[p.type]],
     ['Материали', p.materials.map((m) => <Link key={m} to={`/materiali/${m}`} className="underline-offset-4 hover:underline">{materialLabels[m]}</Link>).reduce<React.ReactNode[]>((a, el, i) => (i ? [...a, ' + ', el] : [el]), [])],
     ['Услуги', p.services.map((s) => serviceLabels[s]).join(', ')],
@@ -47,10 +47,11 @@ function ProjectView({ p }: { p: NonNullable<ReturnType<typeof getProject>> }) {
     <article>
       <header className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden bg-[#141517] text-white">
         <Media image={p.cover} priority className="absolute inset-0 h-full w-full anim-kenburns" label={p.isPlaceholder ? 'Примерен обект · placeholder' : false} labelClassName="right-3 top-[calc(4.75rem+env(safe-area-inset-top))] lg:top-24" />
+        {p.detailsPending && <PendingTag className="right-3 top-[calc(4.75rem+env(safe-area-inset-top))] lg:top-24" />}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/30" aria-hidden="true" />
         <div className="container-x relative pb-10 pt-28 md:pb-16">
           <Breadcrumbs inverse items={[{ name: 'Начало', to: '/' }, { name: 'Проекти', to: '/proekti' }, { name: p.title, to: `/proekti/${p.slug}` }]} />
-          <p className="text-white/80 anim-rise">{p.location.city} · {buildingTypeSingular[p.type]}</p>
+          <p className="text-white/80 anim-rise">{p.location.city && `${p.location.city} · `}{buildingTypeSingular[p.type]}</p>
           <h1 className="display mt-2 max-w-5xl !text-[clamp(2.6rem,9vw,5.5rem)] anim-rise" style={{ ['--d' as string]: '80ms' }}>{p.title}</h1>
           <p className="mt-4 max-w-2xl text-lg text-white/85 anim-rise" style={{ ['--d' as string]: '160ms' }}>{p.summary}</p>
         </div>

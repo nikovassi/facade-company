@@ -1,7 +1,7 @@
 # FACADE — сайт за фасадни системи (MVP)
 
 Mobile-first, prerendered PWA за фирма за проектиране, доставка, изработка и монтаж на фасадни облицовки
-(Al Bond / ACP / Alucobond, HPL, керамика, Laminam). Основната цел на сайта е **запитване за оферта**.
+(Al Bond / ACP / Alucobond, HPL, керамика). Основната цел на сайта е **запитване за оферта**.
 
 > **SHOW THE WORK. EXPLAIN THE SOLUTION. MAKE IT EASY TO ASK FOR A QUOTE.**
 

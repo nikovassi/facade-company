@@ -22,7 +22,7 @@ const topics: { icon: IconName; t: string; d: string }[] = [
 export default function Architects() {
   useSeo({
     title: 'За проектанти — техническа информация, CAD и спецификации',
-    description: 'Техническа информация за фасадни системи: спецификации, системи за монтаж, CAD детайли, PDF документация и сертификати за Al Bond, HPL, керамика и Laminam.',
+    description: 'Техническа информация за фасадни системи: спецификации, системи за монтаж, CAD детайли, PDF документация и сертификати за Al Bond, HPL и керамика.',
     path: '/za-proektanti',
     jsonLd: [breadcrumbLd([{ name: 'Начало', path: '/' }, { name: 'За проектанти', path: '/za-proektanti' }])],
   })

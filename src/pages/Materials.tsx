@@ -9,8 +9,8 @@ import { breadcrumbLd, useSeo } from '../lib/seo'
 
 export default function Materials() {
   useSeo({
-    title: 'Материали — Al Bond, HPL, керамика, Laminam',
-    description: 'Фасадни материали: алуминиев композитен панел (Al Bond, ACP, Alucobond), HPL, керамични фасадни плочи, Laminam и други облицовки.',
+    title: 'Материали — Al Bond, HPL, керамика',
+    description: 'Фасадни материали: алуминиев композитен панел (Al Bond, ACP, Alucobond), HPL, керамични фасадни плочи и други облицовки.',
     path: '/materiali',
     jsonLd: [breadcrumbLd([{ name: 'Начало', path: '/' }, { name: 'Материали', path: '/materiali' }])],
   })

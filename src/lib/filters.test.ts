@@ -11,9 +11,13 @@ describe('project filtering', () => {
     expect(r.length).toBeGreaterThan(0)
     expect(r.every((p) => p.materials.includes('hpl'))).toBe(true)
   })
-  it('combines material + building type + city', () => {
-    const r = filterProjects(projects, { material: 'al-bond', type: 'office', city: 'София' })
-    expect(r.every((p) => p.materials.includes('al-bond') && p.type === 'office' && p.location.city === 'София')).toBe(true)
+  it('combines material + building type', () => {
+    const r = filterProjects(projects, { material: 'al-bond', type: 'retail' })
+    expect(r.length).toBeGreaterThan(0)
+    expect(r.every((p) => p.materials.includes('al-bond') && p.type === 'retail')).toBe(true)
+  })
+  it('projects without a city are not offered as a location filter', () => {
+    expect(filterOptions(projects).cities).not.toContain('')
   })
   it('filters by service', () => {
     const r = filterProjects(projects, { service: 'rekonstrukciya-na-fasadi' })
@@ -28,7 +32,7 @@ describe('project filtering', () => {
     expect(parseFilter(new URLSearchParams('material=hpl&type=office&x=1'))).toEqual({ material: 'hpl', type: 'office' })
   })
   it('material → projects mapping', () => {
-    expect(projectsForMaterial(projects, 'laminam').every((p) => p.materials.includes('laminam'))).toBe(true)
+    expect(projectsForMaterial(projects, 'keramika').every((p) => p.materials.includes('keramika'))).toBe(true)
   })
   it('related projects exclude the current one', () => {
     const p = projects[0]
