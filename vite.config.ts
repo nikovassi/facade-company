@@ -52,6 +52,9 @@ export default defineConfig(({ mode, isSsrBuild }) => {
           // and only when offline the static offline page is shown.
           navigateFallback: null,
           cleanupOutdatedCaches: true,
+          // A new deploy takes over immediately; registerSW (autoUpdate) then reloads open tabs once.
+          skipWaiting: true,
+          clientsClaim: true,
           runtimeCaching: [
             {
               urlPattern: ({ request }) => request.mode === 'navigate',
