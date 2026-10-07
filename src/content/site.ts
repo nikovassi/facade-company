@@ -8,6 +8,8 @@ import type { Certificate, ImageAsset, TrustFact, VideoAsset } from './types'
 export const site = {
   /** Source: recom.bg (НАЧАЛО, КОНТАКТИ) */
   brand: 'РЕКОМ ГРУП',
+  /** Key stored with every lead (one Supabase project serves both sites) */
+  leadSite: 'recom' as 'recom' | 'plamk',
   brandTagline: 'фасадни системи',
   legalName: 'РЕКОМ ГРУП ЕООД' as string | null,
   /** ЕИК */
